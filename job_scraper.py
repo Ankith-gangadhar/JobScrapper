@@ -31,7 +31,7 @@ def main():
     body = generate_naukri_urls()
 
     # Save to file
-    filepath = "D:/JobScraper/job_updates.txt"
+    filepath = "D:/JobScrapper/job_updates.txt"
     with open(filepath, "w", encoding="utf-8") as f:
         f.write(body)
 

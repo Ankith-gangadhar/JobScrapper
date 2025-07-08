@@ -1,11 +1,19 @@
-🕒 Jobs fetched at: 2025-07-08 12:05
+🕒 Naukri Fresher Jobs – Bangalore – Generated at 2025-07-08 12:42
 
-🔍 Results for: site:naukri.com software developer fresher masters Bangalore
+🔹 .NET Freshers:
+https://www.naukri.com/fresher-dot-net-jobs-in-bangalore
 
-🔍 Results for: site:glassdoor.com full stack developer fresher masters Bangalore
+🔹 Cloud Freshers:
+https://www.naukri.com/fresher-cloud-fresher-jobs-in-bangalore
 
-🔍 Results for: site:careers.google.com backend developer Bangalore fresher masters
+🔹 JavaScript Freshers:
+https://www.naukri.com/fresher-javascript-fresher-jobs-in-bangalore
 
-🔍 Results for: site:careers.microsoft.com cloud engineer Bangalore fresher masters
+🔹 Java Freshers:
+https://www.naukri.com/fresher-java-fresher-jobs-in-bangalore
 
-🔍 Results for: site:jobs.linkedin.com software engineer Bangalore fresher masters
+🔹 C# Freshers:
+https://www.naukri.com/fresher-c-sharp-fresher-jobs-in-bangalore
+
+🔹 Node.js Freshers:
+https://www.naukri.com/fresher-nodejs-fresher-jobs-in-bangalore
