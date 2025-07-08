@@ -1,91 +1,48 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.edge.options import Options
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.edge.service import Service as EdgeService
 import datetime
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
-import time
 
-# Email configuration
+# Email config
 EMAIL_SENDER = "ankithcart@gmail.com"
 EMAIL_PASSWORD = "dgct fluy pjqp zwrw"
 EMAIL_RECEIVER = "ankithgangaclassic@gmail.com"
 
-# Job search queries (for masters freshers in Bangalore)
-keywords = [
-    "site:naukri.com software developer fresher masters Bangalore",
-    "site:glassdoor.com full stack developer fresher masters Bangalore",
-    "site:careers.google.com backend developer Bangalore fresher masters",
-    "site:careers.microsoft.com cloud engineer Bangalore fresher masters",
-    "site:jobs.linkedin.com software engineer Bangalore fresher masters",
-]
+def generate_naukri_urls():
+    skills = {
+        ".NET": "https://www.naukri.com/fresher-dot-net-jobs-in-bangalore",
+        "Cloud": "https://www.naukri.com/fresher-cloud-fresher-jobs-in-bangalore",
+        "JavaScript": "https://www.naukri.com/fresher-javascript-fresher-jobs-in-bangalore",
+        "Java": "https://www.naukri.com/fresher-java-fresher-jobs-in-bangalore",
+        "C#": "https://www.naukri.com/fresher-c-sharp-fresher-jobs-in-bangalore",
+        "Node.js": "https://www.naukri.com/fresher-nodejs-fresher-jobs-in-bangalore",
+    }
 
-def fetch_jobs():
     today = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-    job_results = [f"🕒 Jobs fetched at: {today}"]
+    lines = [f"🕒 Naukri Fresher Jobs – Bangalore – Generated at {today}\n"]
 
-    # Configure Edge for headless browsing
-    edge_options = Options()
-    edge_options.add_argument("--headless")
-    edge_options.add_argument("--disable-gpu")
-    edge_options.add_argument("--window-size=1920,1080")
-    edge_options.add_argument("--log-level=3")
+    for skill, url in skills.items():
+        lines.append(f"🔹 {skill} Freshers:\n{url}\n")
 
-    driver_path = "D:/JobScraper/msedgedriver.exe"
-    driver = webdriver.Edge(service=EdgeService(driver_path), options=edge_options)
+    return "\n".join(lines)
 
-    total_jobs = 0
+def main():
+    body = generate_naukri_urls()
 
-    for query in keywords:
-        driver.get("https://duckduckgo.com/")
-        search = driver.find_element(By.NAME, "q")
-        search.send_keys(query)
-        search.send_keys(Keys.RETURN)
-
-        time.sleep(2)
-        results = driver.find_elements(By.CSS_SELECTOR, "a.result__a")
-
-        job_results.append(f"\n🔍 Results for: {query}")
-        count = 0
-
-        for link in results:
-            title = link.text.strip()
-            href = link.get_attribute("href")
-
-            if href and href.startswith("http"):
-                job_results.append(f"🔹 {title}\n{href}")
-                count += 1
-                total_jobs += 1
-
-            if count >= 5:
-                break
-
-        if total_jobs >= 15:
-            break
-
-    driver.quit()
-
-    job_text = "\n".join(job_results)
-
-    # Save to local file
-    with open("D:/JobScraper/job_updates.txt", "w", encoding="utf-8") as f:
-        f.write(job_text)
+    # Save to file
+    filepath = "D:/JobScraper/job_updates.txt"
+    with open(filepath, "w", encoding="utf-8") as f:
+        f.write(body)
 
     # Open in Notepad
-    os.startfile("D:/JobScraper/job_updates.txt")
+    os.startfile(filepath)
 
-    # Send email
-    send_email(job_text)
-
-def send_email(body):
+    # Email it
     msg = MIMEMultipart()
     msg['From'] = EMAIL_SENDER
     msg['To'] = EMAIL_RECEIVER
-    msg['Subject'] = "💼 15+ Master's Fresher Jobs in Bangalore"
+    msg['Subject'] = "💼 Naukri Fresher Job Category Links - Bangalore"
 
     msg.attach(MIMEText(body, 'plain'))
 
@@ -95,4 +52,4 @@ def send_email(body):
         server.send_message(msg)
 
 if __name__ == "__main__":
-    fetch_jobs()
+    main()
